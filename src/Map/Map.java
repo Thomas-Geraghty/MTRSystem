@@ -83,6 +83,11 @@ public class Map {
         return line.getStations();
     }
 
+    /**
+     * Lists all connected lines to a Line.
+     * @param lineName
+     * @return 
+     */
     public Set<Line> getConnectedLines(String lineName) {
         Line line = lineList.get(lineName);
         Set<Line> linkedLines = new HashSet<Line>();
@@ -90,6 +95,8 @@ public class Map {
         for(Station station : line.getStations()) {
             linkedLines.addAll(station.getLines());
         }
+        linkedLines.remove(line);
+
         return linkedLines;
     }
 
