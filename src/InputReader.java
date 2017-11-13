@@ -35,6 +35,20 @@ public class InputReader {
 			    for(Station station : Map.getInstance().getStations()) {
 			        System.out.println(station);
                 }
+			}else if(input.matches("(?i)List all stations for line")){
+				
+				System.out.println("Please write the name of the line");
+				
+				String i = scan.nextLine();
+				
+				if(Map.getInstance().getStationsFromLine(i) != null){
+				
+					for(Station station : Map.getInstance().getStationsFromLine(i)){
+						
+						System.out.println(station.getStationName());
+						
+					}
+				}
 			}
 		}
 	}
