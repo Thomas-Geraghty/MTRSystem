@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mtr;
+package controller;
 
 /**
  * A controller for the MTR Information Centre system.
