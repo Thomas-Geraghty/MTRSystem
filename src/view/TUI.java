@@ -1,9 +1,10 @@
 /**
  * 
  */
-package mtr;
+package view;
 
 import java.util.Scanner;
+import controller.Controller;
 
 /**
  * A simple text-based user interface for showing various information about an MTR network.

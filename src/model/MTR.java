@@ -118,11 +118,6 @@ public class MTR {
         ArrayList<Station> listOfStations= new ArrayList<Station>();
 
         listOfStations.addAll(stationList.values());
-            /**
-            for(Line line : station.getLineList()){
-                System.out.println("         "+ "• " + line);
-            }
-             **/
         return listOfStations;
     }
 }

@@ -1,13 +1,14 @@
 package model;
 
-import model.Line;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Station {
 
     private String stationName;
     private ArrayList<Line> lines = new ArrayList<Line>();
+    private HashSet<Station> connectedStations = new HashSet<Station>();
 
 
     public Station(String stationName) {
