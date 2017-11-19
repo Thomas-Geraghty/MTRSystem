@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import Map.*;
+import model.Line;
+import model.Station;
 
 public class Interpreter {
 
