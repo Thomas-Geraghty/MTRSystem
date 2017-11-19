@@ -39,6 +39,14 @@ public class Station {
         return lines;
     }
 
+    public void addConnectedStation(Station station) {
+        connectedStations.add(station);
+    }
+
+    public HashSet<Station> getConnectedStations() {
+        return connectedStations;
+    }
+
     @Override
     public String toString() {
         return "" + stationName + " "+ getClass().getName() + "@" + Integer.toHexString(hashCode());
