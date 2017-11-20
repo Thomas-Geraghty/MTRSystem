@@ -1,5 +1,7 @@
 package  model;
 
+import controller.MTRController;
+
 import java.util.ArrayList;
 
 public class DataInterpreter {
@@ -22,9 +24,6 @@ public class DataInterpreter {
 
                 String stationName = lineList.get(i).get(z);
                 Station station = new Station(stationName);
-                if( i > 1) {
-                    
-                }
                 station.addLine(line);
 
                  MTR.getInstance().addStation(station);

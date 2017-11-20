@@ -1,10 +1,12 @@
 package model;
 
+import controller.MTRController;
+
 public class Main {
 
     public static void main(String[] args) {
-        Reader reader = new Reader();
-
-        System.out.println(reader.readFile());
+        DataInterpreter interpreter = new DataInterpreter();
+        MTRController controller = new MTRController();
+        System.out.println(controller.listAllTermini());
     }
 }

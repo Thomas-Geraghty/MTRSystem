@@ -49,6 +49,6 @@ public class Station {
 
     @Override
     public String toString() {
-        return "" + stationName + " "+ getClass().getName() + "@" + Integer.toHexString(hashCode());
+        return "" + stationName + getClass().getName() + "@" + Integer.toHexString(hashCode());
     }
 }

@@ -57,21 +57,22 @@ public class MTR {
         }
     }
 
+    public void connectStations() {
+        for(Line line : lineList.values()) {
+            for(int i = 0; i < line.getStations().size(); i++) {
+                if(i > 0) {
+                    line.getStations().get(i).addConnectedStation(line.getStations().get(i -1));
+                }
+            }
+        }
+    }
+
     /**
      * Returns array of Station objects representing the termini of passed Line.
      * The first element representing the first termini and the second element representing the final termini.
      * @param lineName      Name of line to get termini of.
      * @return  Station{[]         Array of Station objects representing termini.
      */
-    public Station[] getTermini(String lineName) {
-        Line line = lineList.get(lineName);
-        Station[] termini = new Station[2];
-
-        termini[0] = line.getStations().get(0);
-        termini[1] = line.getStations().get(line.getStations().size() -1);
-
-        return termini;
-    }
 
     /**
      * Returns an ArrayList containing all the Station objects of the line.
@@ -104,10 +105,8 @@ public class MTR {
      * Returns all the Line objects in the MTR, in an ArrayList.
      * @return  ArrayList<Line>     ArrayList containing Line objects.
      */
-    public ArrayList<Line> getLineList() {
-        ArrayList<Line> listOfLines= new ArrayList<Line>();
-        listOfLines.addAll(lineList.values());
-        return listOfLines;
+    public HashMap<String, Line> getLineList() {
+        return lineList;
     }
 
     /**
