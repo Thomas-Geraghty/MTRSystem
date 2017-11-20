@@ -19,7 +19,7 @@ public class MTRController implements Controller {
             buffer += ("Line: " + line.getLineName());
             buffer += ("\n");
             buffer += (termini[0] + " <-> " + termini[1]);
-            buffer += ("\n \n");
+            buffer += ("\n\n");
         }
         return buffer;
     }
