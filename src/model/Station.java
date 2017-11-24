@@ -4,11 +4,10 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Station {
+public class Station extends Node {
 
     private String stationName;
-    private ArrayList<Line> lines = new ArrayList<Line>();
-    private HashSet<Station> connectedStations = new HashSet<Station>();
+    private HashSet<Line> lines = new HashSet<Line>();
 
 
     public Station(String stationName) {
@@ -35,16 +34,8 @@ public class Station {
      * Returns arraylist containing what Lines station is part of.
      * @return
      */
-    public ArrayList<Line> getLines() {
+    public HashSet<Line> getLines() {
         return lines;
-    }
-
-    public void addConnectedStation(Station station) {
-        connectedStations.add(station);
-    }
-
-    public HashSet<Station> getConnectedStations() {
-        return connectedStations;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package  model;
 
-import controller.MTRController;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataInterpreter {
 
@@ -12,22 +11,37 @@ public class DataInterpreter {
 
     private void interpretCSV() {
         Reader reader = new Reader();
-        ArrayList<ArrayList<String>> lineList = reader.readFile();
+        ArrayList<ArrayList<String>> lines = reader.readFile();
+        HashMap<String, Station> importedStations = new HashMap<>();
 
-        for(int i  = 0; i < lineList.size(); i++) {
+        for(ArrayList<String> lineArray : lines) {
+            Line line = new Line(lineArray.get(0));
+            ArrayList<Station> stationsInLine = new ArrayList<Station>();
 
-            Line line = new Line(lineList.get(i).get(0));
+            for(int i = 1; i < lineArray.size(); i++) {
+                String stationName = lineArray.get(i);
+                Station station;
 
-            MTR.getInstance().addLine(line);
-
-            for(int z = 1; z < lineList.get(i).size(); z++) {
-
-                String stationName = lineList.get(i).get(z);
-                Station station = new Station(stationName);
+                if(importedStations.get(stationName) == null) {
+                    station = new Station(stationName);
+                    importedStations.put(stationName, station);
+                } else {
+                    station = importedStations.get(stationName);
+                }
+                line.addStation(station);
                 station.addLine(line);
-
-                 MTR.getInstance().addStation(station);
+                MTR.getInstance().addStation(station);
             }
+
+            for(int i = 0; i < line.getStations().size(); i++) {
+                if(i > 0) {
+                    line.getStations().get(i).addConnectedNode(line.getStations().get(i - 1));
+                }
+                if(i < (line.getStations().size() -1)) {
+                    line.getStations().get(i).addConnectedNode(line.getStations().get(i + 1));
+                }
+            }
+            MTR.getInstance().addLine(line);
         }
     }
 }
