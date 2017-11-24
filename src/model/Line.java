@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Line {
 
+    private final ArrayList<Station> STATIONS_IN_LINE = new ArrayList<Station>();
     private String lineName;
-    private ArrayList<Station> stations = new ArrayList<Station>();
+
 
 
     public Line(String lineName) {
@@ -25,19 +26,19 @@ public class Line {
      * @param station
      */
     public void addStation(Station station) {
-        stations.add(station);
+        STATIONS_IN_LINE.add(station);
     }
 
     /**
-     * Returns all stations of line.
+     * Returns all STATIONS_IN_LINE of line.
      * @return
      */
-    public ArrayList<Station> getStations() {
-        return stations;
+    public ArrayList<Station> getSTATIONS_IN_LINE() {
+        return STATIONS_IN_LINE;
     }
 
     @Override
     public String toString() {
-        return "Line " + lineName + " "+ getClass().getName() + "@" + Integer.toHexString(hashCode());
+        return lineName;
     }
 }

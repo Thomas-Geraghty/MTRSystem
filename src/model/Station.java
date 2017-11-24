@@ -1,13 +1,12 @@
 package model;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Station extends Node {
 
+    private final HashSet<Line> STATION_IN_LINES = new HashSet<Line>();
     private String stationName;
-    private HashSet<Line> lines = new HashSet<Line>();
 
 
     public Station(String stationName) {
@@ -27,19 +26,19 @@ public class Station extends Node {
      * @param line
      */
     public void addLine(Line line) {
-        lines.add(line);
+        STATION_IN_LINES.add(line);
     }
 
     /**
      * Returns arraylist containing what Lines station is part of.
      * @return
      */
-    public HashSet<Line> getLines() {
-        return lines;
+    public HashSet<Line> getSTATION_IN_LINES() {
+        return STATION_IN_LINES;
     }
 
     @Override
     public String toString() {
-        return "" + stationName + getClass().getName() + "@" + Integer.toHexString(hashCode());
+        return stationName;
     }
 }

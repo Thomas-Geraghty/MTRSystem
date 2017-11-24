@@ -1,32 +1,23 @@
 package model;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MTR {
 
-    private static MTR instance;
-    private Graph graphOfStations = new Graph();
-    private HashMap<String, Line> lineList = new HashMap<String, Line>();
-    private HashMap<String, Station> stationList = new HashMap<String, Station>();
+    private static final HashMap<String, Line> LIST_OF_LINES = new HashMap<String, Line>();
+    private static final HashMap<String, Station> LIST_OF_STATIONS = new HashMap<String, Station>();
+    private static MTR INSTANCE;
 
     /**
-     * Singleton pattern. for class MTR
-     */
-    private MTR() {
-    }
-
-    /**
-     * Part of singleton patten for class MTR. Returns single instance of MTR.
-     * @return instance     Instance of MTR class that is constant.
+     * Part of singleton patten for class MTR. Returns single INSTANCE of MTR.
+     * @return INSTANCE     Instance of MTR class that is constant.
      */
     public static MTR getInstance() {
-        if (instance == null) {
-            instance = new MTR();
+        if (INSTANCE == null) {
+            INSTANCE = new MTR();
         }
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -34,7 +25,24 @@ public class MTR {
      * @param line      Line object to add.
      */
     public void addLine(Line line) {
-        lineList.put(line.getLineName(), line);
+        LIST_OF_LINES.put(line.getLineName(), line);
+    }
+
+    /**
+     * Returns the corresponding Line object from a line's name which is passed.
+     * @param lineName
+     * @return
+     */
+    public Line getLine(String lineName) {
+        try {
+            if(LIST_OF_LINES.containsKey(lineName)) {
+                return LIST_OF_LINES.get(lineName);
+            } else {
+                throw new NullPointerException("No such Line with that name.");
+            }
+        } catch (NullPointerException ex){
+            return null;
+        }
     }
 
     /**
@@ -42,7 +50,7 @@ public class MTR {
      * @return  ArrayList<Line>     ArrayList containing Line objects.
      */
     public HashMap<String, Line> getLines() {
-        return lineList;
+        return LIST_OF_LINES;
     }
 
     /**
@@ -52,8 +60,24 @@ public class MTR {
      * @param station       Station to add to system.
      */
     public void addStation(Station station) {
-        stationList.put(station.getStationName(),station);
-        graphOfStations.addNode(station);
+        LIST_OF_STATIONS.put(station.getStationName(),station);
+    }
+
+    /**
+     * Returns corresponding Station object based on passed station name.
+     * @param stationName
+     * @return
+     */
+    public Station getStation(String stationName) {
+        try {
+            if(LIST_OF_STATIONS.containsKey(stationName)) {
+                return LIST_OF_STATIONS.get(stationName);
+            } else {
+                throw  new NullPointerException("No such Station with that name.");
+            }
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     /**
@@ -61,27 +85,6 @@ public class MTR {
      * @return  ArrayList<Station>     ArrayList containing Station objects.
      */
     public HashMap<String, Station> getStations() {
-        return stationList;
-    }
-
-    /**
-     * Lists all connected lines to a Line.
-     * @param lineName
-     * @return 
-     */
-    public Set<Line> getConnectedLines(String lineName) {
-        Line line = lineList.get(lineName);
-        Set<Line> linkedLines = new HashSet<Line>();
-
-        for(Station station : line.getStations()) {
-            linkedLines.addAll(station.getLines());
-        }
-        linkedLines.remove(line);
-
-        return linkedLines;
-    }
-
-    public Graph getGraph() {
-        return graphOfStations;
+        return LIST_OF_STATIONS;
     }
 }
