@@ -13,7 +13,7 @@ public class Reader {
 
     public Reader() {
         try{
-            file = new File("dscs.csv");
+            file = new File("resources/MTRsystem_partial.csv");
             fr = new FileReader(file);
             br = new BufferedReader(fr);
 
