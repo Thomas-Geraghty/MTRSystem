@@ -1,90 +1,121 @@
 package model;
 
-
 import java.util.HashMap;
+import java.util.Map;
 
+import exceptions.LineNotFoundException;
+import exceptions.StationNotFoundException;
+
+/**
+ * This class is responsible for building the MTR System's <code>Line</code>'s
+ * and <code>Station</code>'s.
+ * 
+ * @author Joshua Gallagher
+ * @author Thomas Geraghty
+ * @author Dimitar Stoynev
+ * @version 15/10/2017
+ */
 public class MTR {
 
-    private static final HashMap<String, Line> LIST_OF_LINES = new HashMap<String, Line>();
-    private static final HashMap<String, Station> LIST_OF_STATIONS = new HashMap<String, Station>();
-    private static MTR INSTANCE;
+	/**
+	 * Stores the name of the line and a <code>Line</code> object in a
+	 * <code>Map</code>.
+	 */
+	private final Map<String, Line> listOfLines;
 
-    /**
-     * Part of singleton patten for class MTR. Returns single INSTANCE of MTR.
-     * @return INSTANCE     Instance of MTR class that is constant.
-     */
-    public static MTR getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new MTR();
-        }
-        return INSTANCE;
-    }
+	/**
+	 * Stores the name of a station and a <code>Station</code> object in a
+	 * <code>Map</code>.
+	 */
+	private final Map<String, Station> listOfStations;
 
-    /**
-     * Adds passed Line object to list of current lines in the system.
-     * @param line      Line object to add.
-     */
-    public void addLine(Line line) {
-        LIST_OF_LINES.put(line.getLineName(), line);
-    }
+	/**
+	 * The <code>MTR</code> classes constructor. The <code>listOfLines</code>
+	 * <code>HashMap</code> and <code>listOfStations</code> <code>HashMap</code> is
+	 * initialised for use.
+	 */
+	public MTR() {
+		this.listOfLines = new HashMap<>();
+		this.listOfStations = new HashMap<>();
+	}
 
-    /**
-     * Returns the corresponding Line object from a line's name which is passed.
-     * @param lineName
-     * @return
-     */
-    public Line getLine(String lineName) {
-        try {
-            if(LIST_OF_LINES.containsKey(lineName)) {
-                return LIST_OF_LINES.get(lineName);
-            } else {
-                throw new NullPointerException("No such Line with that name.");
-            }
-        } catch (NullPointerException ex){
-            return null;
-        }
-    }
+	/**
+	 * Adds a <code>Line</code> object to <code>listOfLines</code> in the MTR
+	 * System.
+	 * 
+	 * @param line
+	 *            <code>Line</code> object to be added to <code>listOfLines</code>.
+	 */
+	public void addLine(Line line) {
+		listOfLines.put(line.getLineName(), line);
+	}
 
-    /**
-     * Returns all the Line objects in the MTR, in an ArrayList.
-     * @return  ArrayList<Line>     ArrayList containing Line objects.
-     */
-    public HashMap<String, Line> getLines() {
-        return LIST_OF_LINES;
-    }
+	/**
+	 * Returns the corresponding <code>Line</code> object from a line's name. The
+	 * lines name is a parameter to be passed in.
+	 * 
+	 * @param lineName
+	 *            The <code>Line</code>'s name.
+	 * @return Line Returns a <code>Line</code> object by its <code>lineName</code>.
+	 * @throws LineNotFoundException
+	 *             This exception is thrown when a line can not be found.
+	 */
+	public Line getLine(String lineName) throws LineNotFoundException {
+		if (!listOfLines.containsKey(lineName)) {
+			throw new LineNotFoundException("No such line with that name!");
+		}
+		return listOfLines.get(lineName);
+	}
 
-    /**
-     * Adds station to HashMap of stations, checks if duplicate station, and if so
-     * does not create a new station entry, but instead merges original with duplicate..
-     * Adds the station to the line it is on, too,
-     * @param station       Station to add to system.
-     */
-    public void addStation(Station station) {
-        LIST_OF_STATIONS.put(station.getStationName(),station);
-    }
+	/**
+	 * Returns all the <code>Line</code> objects in the <code>MTR</code>, in an
+	 * <code>ArrayList</code>.
+	 * 
+	 * @return listOfLines Returns the <code>listOfLines</code>, which contains all
+	 *         line in the <code>MTR</code>.
+	 */
+	public Map<String, Line> getLines() {
+		return listOfLines;
+	}
 
-    /**
-     * Returns corresponding Station object based on passed station name.
-     * @param stationName
-     * @return
-     */
-    public Station getStation(String stationName) {
-        try {
-            if(LIST_OF_STATIONS.containsKey(stationName)) {
-                return LIST_OF_STATIONS.get(stationName);
-            } else {
-                throw  new NullPointerException("No such Station with that name.");
-            }
-        } catch (NullPointerException ex) {
-            return null;
-        }
-    }
+	/**
+	 * Add a <code>Station</code> to the <code>listOfStations</code>
+	 * <code>Map</code>.
+	 * 
+	 * @param station
+	 *            <code>Station</code> object to add to the
+	 *            <code>listOfStations</code>.
+	 */
+	public void addStation(Station station) {
+		listOfStations.put(station.getStationName(), station);
+	}
 
-    /**
-     * Returns all the Station objects in the MTR, in an ArrayList.
-     * @return  ArrayList<Station>     ArrayList containing Station objects.
-     */
-    public HashMap<String, Station> getStations() {
-        return LIST_OF_STATIONS;
-    }
+	/**
+	 * Returns corresponding <code>Station</code> object based on passed
+	 * <code>stationName</code>.
+	 * 
+	 * @param stationName
+	 *            The <code>stationName</code> is used to get a specific
+	 *            <code>Station</code> from <code>listOfStations</code>.
+	 * @return Station Returns a <code>Station</code> object.
+	 * @throws StationNotFoundException
+	 *             This exception is thrown when a station can not be found.
+	 */
+	public Station getStation(String stationName) throws StationNotFoundException {
+		if (!listOfStations.containsKey(stationName)) {
+			throw new StationNotFoundException("No such station with that name!");
+		}
+		return listOfStations.get(stationName);
+	}
+
+	/**
+	 * Returns all the <code>Station</code> objects in the <code>MTR</code>, in an
+	 * <code>ArrayList</code>.
+	 * 
+	 * @return listOfStations Returns an <code>ArrayList</code> containing
+	 *         <code>Station</code> objects.
+	 */
+	public Map<String, Station> getStations() {
+		return listOfStations;
+	}
 }

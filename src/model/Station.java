@@ -1,44 +1,80 @@
 package model;
 
-
 import java.util.HashSet;
+import java.util.Set;
 
-public class Station extends Node {
+/**
+ * This class models a railway <code>Station</code> from the MTR System and then
+ * puts it in its associated line.
+ * 
+ * @author Joshua Gallagher
+ * @author Thomas Geraghty
+ * @author Dimitar Stoynev
+ * @version 15/10/2017
+ */
+public class Station extends AbstractNode {
 
-    private final HashSet<Line> STATION_IN_LINES = new HashSet<Line>();
-    private String stationName;
+	/**
+	 * 
+	 */
+	private final Set<Line> stationInLines = new HashSet<>();
 
+	/**
+	 * Stores the name of a given station, e.g. Sunny Bay.
+	 */
+	private String stationName;
 
-    public Station(String stationName) {
-        this.stationName = stationName;
-    }
+	/**
+	 * The <code>Station</code> classes constructor.
+	 * 
+	 * Sets the <code>stationName</code>. E.g. the station name could be set to:
+	 * Sunny Bay.
+	 * 
+	 * @param stationName
+	 *            The <code>Station</code> objects set name.
+	 */
+	public Station(String stationName) {
+		this.stationName = stationName;
+	}
 
-    /**
-     * Returns name of station.
-     * @return
-     */
-    public String getStationName() {
-        return stationName;
-    }
+	/**
+	 * Returns a <code>Station</code> name.
+	 * 
+	 * @return stationName Returns the <code>Station</code>'s name.
+	 */
+	public String getStationName() {
+		return this.stationName;
+	}
 
-    /**
-     * Adds station to a line.
-     * @param line
-     */
-    public void addLine(Line line) {
-        STATION_IN_LINES.add(line);
-    }
+	/**
+	 * Adds a <code>Station</code to a <code>Line</code>.
+	 * 
+	 * @param line
+	 *            A <code>Line</code> object.
+	 */
+	public boolean addLine(Line line) {
+		return stationInLines.add(line);
+	}
 
-    /**
-     * Returns arraylist containing what Lines station is part of.
-     * @return
-     */
-    public HashSet<Line> getSTATION_IN_LINES() {
-        return STATION_IN_LINES;
-    }
+	/**
+	 * Returns an <code>ArrayList</code> containing what <code>Line</code>'s a
+	 * <code>Station</code> is part of.
+	 * 
+	 * @return stationInLines Returns an <code>ArrayList</code> of
+	 *         <code>Stations</code>'s.
+	 */
+	public Set<Line> getStationInLines() {
+		return stationInLines;
+	}
 
-    @Override
-    public String toString() {
-        return stationName;
-    }
+	/**
+	 * Returns the <code>Station</code> objects information. The
+	 * <code>toString</code> method only returns a stations name when called.
+	 * 
+	 * @return string The station name is returned when called on a
+	 *         <code>Station</code> object.
+	 */
+	public String toString() {
+		return this.stationName;
+	}
 }
